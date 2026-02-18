@@ -5,7 +5,7 @@
   "scripts": {
     "dev:web": "nx serve web",
     "build:web": "nx build web",
-    "dev:api": "cd apps/api && ./mvnw spring-boot:run"
+    "dev:api": "cd apps/api && mvnw.cmd spring-boot:run"
   },
   "private": true,
   "dependencies": {
