@@ -1,186 +1,248 @@
-# FlowBoard — Development Guidance Prompt
+# FlowBoard — Development Context & Guidance
 
-This document defines the architectural principles, technical constraints, and development strategy for FlowBoard.
+This document defines the current state, architectural decisions, and development strategy for FlowBoard.
 
-It should be referenced in future conversations to ensure consistency, focus, and architectural coherence.
+It must be referenced in future conversations to ensure continuity and architectural alignment.
 
 ---
 
-# 🎯 Project Objective
+# 🎯 Project Overview
 
-FlowBoard is a modern full-stack project management platform featuring:
+FlowBoard is a modern full-stack project management platform inspired by Jira, featuring:
 
+- Multi-project management
 - Kanban board
-- Real-time updates
-- Role-based access control
-- Multi-project support
-- Authentication & authorization
-- Cloud deployment (AWS)
+- Real-time updates (planned)
+- Authentication & authorization (planned)
+- Role-based access control (planned)
+- AWS deployment (planned)
 
-The primary goal is to build a **production-grade portfolio project** that demonstrates:
+Primary objective:
 
-- Senior-level frontend architecture (Angular Signals + Standalone APIs)
-- Clean backend architecture (Spring Boot 3+)
-- Real-time communication (WebSocket)
-- Proper database modeling (PostgreSQL)
-- DevOps fundamentals (Docker + AWS + CI/CD)
+Build a production-grade portfolio project demonstrating:
 
-Avoid overengineering while maintaining professional architectural quality.
-
----
-
-# 🧠 Development Strategy
-
-We follow a **Frontend-first approach**:
-
-1. Build UI and state management using mocks
-2. Define domain models in TypeScript
-3. Stabilize UX and state architecture
-4. Implement backend persistence
-5. Replace mocks with real HTTP services
-6. Add realtime synchronization
-7. Deploy to AWS
+- Modern Angular architecture (Standalone + Signals)
+- Clean Spring Boot backend
+- PostgreSQL
+- Docker-based infrastructure
+- Monorepo architecture with Nx
+- Professional development workflow
 
 ---
 
-# 🏗️ Architectural Principles
+# 🏗 Current Architecture State
 
 ## Monorepo
-- Nx workspace
-- apps:
-  - web (Angular)
-  - api (Spring Boot)
-- libs:
-  - shared (types, enums, DTOs)
-  - core (auth, layout, infrastructure)
-  - ui (reusable components)
-  - features (domain-driven modules)
 
-## Frontend Rules
-- Standalone Components only
-- Angular Signals for state
-- No NgModules
-- Clear separation between:
-  - UI components
-  - State
-  - Services
-- Smart components at page level
-- Dumb reusable UI components
+Nx workspace (Integrated Monorepo)
 
-## Backend Rules
-- Feature-based package organization
-- JWT authentication
-- Role-based authorization
-- RESTful API design
-- Flyway for migrations
-- WebSocket for real-time updates
+Structure:
+
+flowboard-app/
+├── apps/
+│ ├── web/ → Angular application
+│ └── api/ → Spring Boot backend
+├── libs/ → Reserved for shared frontend libraries
+├── docker-compose.yml
+├── .env (ignored)
+├── .env.example
+├── PROMPT.md
 
 ---
 
-# 📦 Core Domains
+# 🌐 Frontend (Angular)
 
-## User
-- id
-- name
-- email
-- password
-- role
+Status:
 
-## Project
-- id
-- name
-- description
-- members
+- Angular app generated via Nx
+- Standalone components enabled
+- Taiga UI selected as UI component library
+- Layout design reference defined (modern SaaS style)
 
-## Task
-- id
-- title
-- description
-- status
-- priority
-- assignee
-- dueDate
-- projectId
+Next frontend steps (planned):
+
+- Base layout (MainLayout, Sidebar, Topbar)
+- Kanban board (mock-driven)
+- Signal-based state management
+- Feature-based structure inside libs/
 
 ---
 
-# 🔐 Roles
+# 🧠 Backend (Spring Boot)
 
-- ADMIN
-- MEMBER
-- VIEWER
+Created via Spring Initializr and placed under:
 
-Permissions must be enforced both in UI and backend.
+apps/api/
+
+Key decisions:
+
+- Java 21
+- No Lombok
+- Feature-based package structure
+- REST API design
+- JPA + PostgreSQL
+- Spring Security included
+- Spring Boot DevTools enabled
+
+Current execution strategy:
+
+- Run PostgreSQL via Docker
+- Run Spring Boot locally with hot reload
+- Load environment variables via dotenv-cli
 
 ---
 
-# ⚡ Realtime Scope
+# 🐘 Database (PostgreSQL)
 
-- Board updates
-- Task movement
-- Comments
-- Presence indicator (optional)
+Managed via Docker Compose.
+
+docker-compose.yml includes:
+
+- postgres:16
+- Volume for persistence
+- Environment variables from `.env`
+
+Database runs isolated from host machine.
+
+Development workflow:
+
+docker compose up postgres -d
 
 ---
 
-# 🧪 Testing Strategy
+# 🔐 Environment Variables Strategy
+
+Environment variables stored in:
+
+.env (ignored by Git)
+
+Template stored in:
+
+.env.example (committed)
+
+Variables include:
+
+- POSTGRES_DB
+- POSTGRES_USER
+- POSTGRES_PASSWORD
+- SPRING_DATASOURCE_URL
+- SPRING_DATASOURCE_USERNAME
+- SPRING_DATASOURCE_PASSWORD
+- SPRING_PROFILES_ACTIVE
+
+Spring profile system:
+
+- application.yml → base
+- application-dev.yml → development config
+
+---
+
+# 🚀 Backend Development Workflow
+
+Run backend with environment variables loaded:
+
+npm run dev:api
+
+Script uses:
+
+dotenv-cli + bash
+
+Command executed internally:
+
+dotenv -e .env -- bash -c "cd apps/api && ./mvnw spring-boot:run"
+
+Hot reload enabled via Spring DevTools.
+
+---
+
+# 🐳 Containerization Strategy
+
+Current approach:
+
+- PostgreSQL → Docker container
+- Backend → runs locally during development
+- Full backend containerization prepared but not primary dev mode
+
+Reason:
+
+Faster development cycle and easier debugging.
+
+Future:
+
+Full containerized stack for integration testing and deployment.
+
+---
+
+# 📦 Architectural Principles
 
 Frontend:
-- Unit tests for stores
-- Component tests for critical UI
+
+- Standalone components only
+- Angular Signals for state
+- Feature-based organization
+- Separation of UI, state, services
 
 Backend:
-- Service layer tests
-- Basic integration tests
 
-Avoid excessive testing boilerplate.
+- Feature-based packages
+- Explicit constructors and methods (no Lombok)
+- Records for DTOs
+- Clear service layer
+- No overengineering
 
----
+Infrastructure:
 
-# 🚀 Deployment Goals
-
-- Dockerized frontend
-- Dockerized backend
-- PostgreSQL (RDS in production)
-- AWS EC2 or Elastic Beanstalk
-- HTTPS
-- CI/CD with GitHub Actions
-
----
-
-# 📈 Quality Standards
-
-- Small semantic commits
-- Clean commit history
-- Meaningful PR-style descriptions
-- Production-level README
-- Architecture diagram before final deployment
+- Docker for database
+- Environment variables for configuration
+- Profiles for environment separation
 
 ---
 
 # ❌ Avoid
 
 - Premature microservices
-- Complex DDD layering
+- Excessive abstraction
 - Event sourcing
-- Unnecessary abstraction
+- Complex DDD layering
 - Overuse of global state
+- Hardcoded secrets
 
 ---
 
-# 🧭 How to Use This File
+# 📌 Current Phase
 
-When starting a new development session:
+Infrastructure Setup Phase — Completed
 
-1. Describe what has already been implemented
-2. State the next feature to build
-3. Clarify whether we are in:
+- Nx monorepo created
+- Angular app scaffolded
+- Spring Boot backend scaffolded
+- PostgreSQL configured with Docker
+- Environment variables configured
+- Dev workflow stabilized
+
+Next phase:
+
+Domain modeling + First backend module (User + Auth)
+OR
+Frontend layout implementation
+
+---
+
+# 🧭 How to Continue in Future Sessions
+
+When starting a new session:
+
+1. Reference this PROMPT.md
+2. Describe current phase
+3. Specify whether working on:
+   - Frontend
+   - Backend
+   - Infrastructure
+   - Integration
+4. Clarify whether using:
    - Mock phase
-   - Backend implementation phase
-   - Realtime phase
-   - Deployment phase
-
-This ensures continuity and architectural alignment.
+   - Real persistence phase
+   - Containerized mode
 
 ---
 
@@ -188,4 +250,4 @@ This ensures continuity and architectural alignment.
 
 FlowBoard is not a tutorial project.
 
-It is a production-grade SaaS architecture simulation built to demonstrate modern full-stack engineering skills aligned with 2026 market demands.
+It is a production-grade SaaS architecture simulation designed to demonstrate modern full-stack engineering skills aligned with 2026 market demands.
