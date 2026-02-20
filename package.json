@@ -5,7 +5,7 @@
   "scripts": {
     "dev:web": "nx serve web",
     "build:web": "nx build web",
-    "dev:api": "cd apps/api && mvnw.cmd spring-boot:run"
+    "dev:api": "dotenv -e .env -- bash -c \"cd apps/api && ./mvnw spring-boot:run\""
   },
   "private": true,
   "dependencies": {
@@ -37,6 +37,7 @@
     "@swc/helpers": "~0.5.18",
     "@typescript-eslint/utils": "^8.40.0",
     "angular-eslint": "^21.0.1",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
     "jsdom": "^27.1.0",
