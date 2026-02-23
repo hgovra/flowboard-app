@@ -1,5 +1,6 @@
 {
   "name": "features",
+  "importPath": "@flowboard/features",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/features/src",
   "prefix": "lib",
