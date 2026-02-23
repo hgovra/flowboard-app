@@ -5,7 +5,7 @@
   "sourceRoot": "libs/features/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [],
+  "tags": ["scope:shared", "type:features"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",
