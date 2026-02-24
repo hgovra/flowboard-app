@@ -6,9 +6,10 @@
     "dev:web": "nx serve web",
     "build:web": "nx build web",
     "dev:api": "dotenv -e .env -- bash -c \"cd apps/api && ./mvnw spring-boot:run\"",
-    "lint": "nx run-many --target=lint --all --fix",
+    "lint": "nx run-many --target=lint --all",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
@@ -47,6 +48,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-simple-import-sort": "^12.1.1",
+    "husky": "^9.1.7",
     "jsdom": "^27.1.0",
     "jsonc-eslint-parser": "^2.1.0",
     "ng-packagr": "~21.1.0",
