@@ -5,24 +5,24 @@ inspired by Jira, designed as a production-grade portfolio project to
 demonstrate advanced frontend, backend, infrastructure, and
 architectural skills aligned with 2026 market standards.
 
-------------------------------------------------------------------------
+---
 
 ## 🚀 Project Vision
 
 FlowBoard simulates a real SaaS product architecture with:
 
--   Multi-project management
--   Kanban board interface
--   Role-based access control (RBAC)
--   Real-time updates (planned)
--   Secure authentication (planned)
--   Cloud-ready deployment strategy (AWS planned)
+- Multi-project management
+- Kanban board interface
+- Role-based access control (RBAC)
+- Real-time updates (planned)
+- Secure authentication (planned)
+- Cloud-ready deployment strategy (AWS planned)
 
 This is not a tutorial project.\
 It is a system architecture exercise designed to reflect real-world
 engineering standards.
 
-------------------------------------------------------------------------
+---
 
 ## 🏗 Architecture Overview
 
@@ -36,34 +36,34 @@ infrastructure concerns.
 For full technical details, see:\
 **ARCHITECTURE.md**
 
-------------------------------------------------------------------------
+---
 
 ## 🧰 Tech Stack
 
 ### Frontend
 
--   Angular (Standalone APIs)
--   Nx Monorepo
--   Taiga UI
--   Angular Signals (planned)
--   SCSS
+- Angular (Standalone APIs)
+- Nx Monorepo
+- Taiga UI
+- Angular Signals (planned)
+- SCSS
 
 ### Backend
 
--   Java 21
--   Spring Boot 3+
--   Spring Security
--   Spring Data JPA
--   PostgreSQL
--   Maven
+- Java 21
+- Spring Boot 3+
+- Spring Security
+- Spring Data JPA
+- PostgreSQL
+- Maven
 
 ### Infrastructure
 
--   Docker (PostgreSQL container)
--   Environment-based configuration
--   dotenv-cli for local variable injection
+- Docker (PostgreSQL container)
+- Environment-based configuration
+- dotenv-cli for local variable injection
 
-------------------------------------------------------------------------
+---
 
 ## 📁 Monorepo Structure
 
@@ -71,13 +71,13 @@ flowboard-app/ │ ├── apps/ │ ├── web/ → Angular application �
 Spring Boot backend │ ├── libs/ → Shared frontend libraries (planned) │
 ├── docker-compose.yml ├── PROMPT.md ├── ARCHITECTURE.md
 
-------------------------------------------------------------------------
+---
 
 ## ⚙️ Local Development Setup
 
 ### 1️⃣ Start PostgreSQL (Docker)
 
-``` bash
+```bash
 docker compose up postgres -d
 ```
 
@@ -89,7 +89,7 @@ Create a `.env` file based on:
 
 ### 3️⃣ Run Backend
 
-``` bash
+```bash
 npm run dev:api
 ```
 
@@ -101,23 +101,23 @@ Spring Boot runs locally with DevTools enabled for hot reload.
 
 ### 4️⃣ Run Frontend
 
-``` bash
+```bash
 npx nx serve web
 ```
 
-------------------------------------------------------------------------
+---
 
 ## 🔐 Environment Variables
 
 Environment configuration is managed via:
 
--   `.env` (ignored)
--   `.env.example` (committed)
--   Spring profiles (`application-dev.yml`)
+- `.env` (ignored)
+- `.env.example` (committed)
+- Spring profiles (`application-dev.yml`)
 
 Sensitive credentials are never committed.
 
-------------------------------------------------------------------------
+---
 
 ## 📌 Current Status
 
@@ -130,32 +130,32 @@ Sensitive credentials are never committed.
 
 Next phase:
 
--   Domain modeling
--   User authentication module
--   Kanban board implementation
--   Realtime updates
+- Domain modeling
+- User authentication module
+- Kanban board implementation
+- Realtime updates
 
-------------------------------------------------------------------------
+---
 
 ## 🎯 Purpose
 
 FlowBoard exists to demonstrate:
 
--   Monorepo architecture with Nx
--   Modern Angular architecture
--   Clean Spring Boot backend structure
--   Docker-based development environment
--   Infrastructure-aware engineering
--   Production-oriented thinking
+- Monorepo architecture with Nx
+- Modern Angular architecture
+- Clean Spring Boot backend structure
+- Docker-based development environment
+- Infrastructure-aware engineering
+- Production-oriented thinking
 
-------------------------------------------------------------------------
+---
 
 ## 📄 Documentation
 
--   Development Context → `PROMPT.md`
--   System Architecture → `ARCHITECTURE.md`
+- Development Context → `PROMPT.md`
+- System Architecture → `ARCHITECTURE.md`
 
-------------------------------------------------------------------------
+---
 
 ## 📜 License
 

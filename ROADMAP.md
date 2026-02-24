@@ -1,4 +1,3 @@
-
 # FlowBoard — Roadmap
 
 This roadmap outlines the planned evolution of FlowBoard in clear and incremental phases.
@@ -188,20 +187,23 @@ Tempo: 3–4 dias
 
 Ordem recomendada:
 
-1️⃣ Projetos  
-- Criar entidades  
-- Criar CRUD  
-- Substituir MockProjectService  
+1️⃣ Projetos
 
-2️⃣ Tasks  
-- CRUD tarefas  
-- Endpoint mover tarefa  
-- Substituir MockTaskService  
+- Criar entidades
+- Criar CRUD
+- Substituir MockProjectService
 
-3️⃣ Auth  
-- JWT  
-- Spring Security  
-- Substituir MockUserService  
+2️⃣ Tasks
+
+- CRUD tarefas
+- Endpoint mover tarefa
+- Substituir MockTaskService
+
+3️⃣ Auth
+
+- JWT
+- Spring Security
+- Substituir MockUserService
 
 Tempo total backend: 2–3 semanas (~75h)
 
@@ -240,13 +242,13 @@ Tempo estimado: 1–2 semanas
 
 ## 📊 Cronograma Total
 
-| Fase | Semanas |
-|------|---------|
-| Setup | 1 |
-| Projetos | 1 |
-| Kanban | 2 |
-| Auth (mock) | 1 |
-| Backend real | 3 |
-| Realtime | 1 |
-| AWS | 1–2 |
-| **Total** | **10–11 semanas (~300h)** |
+| Fase         | Semanas                   |
+| ------------ | ------------------------- |
+| Setup        | 1                         |
+| Projetos     | 1                         |
+| Kanban       | 2                         |
+| Auth (mock)  | 1                         |
+| Backend real | 3                         |
+| Realtime     | 1                         |
+| AWS          | 1–2                       |
+| **Total**    | **10–11 semanas (~300h)** |
