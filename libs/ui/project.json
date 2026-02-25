@@ -1,6 +1,5 @@
 {
   "name": "ui",
-  "importPath": "@flowboard/ui",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/ui/src",
   "prefix": "lib",
@@ -12,7 +11,18 @@
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
         "project": "libs/ui/ng-package.json",
-        "tsConfig": "libs/ui/tsconfig.lib.json"
+        "tsConfig": "libs/ui/tsconfig.lib.json",
+        "styles": [
+          "@taiga-ui/core/styles/taiga-ui-theme.less",
+          "@taiga-ui/core/styles/taiga-ui-fonts.less"
+        ],
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "node_modules/@taiga-ui/icons/src",
+            "output": "assets/taiga-ui/icons"
+          }
+        ]
       },
       "configurations": {
         "production": {
@@ -20,7 +30,12 @@
         },
         "development": {}
       },
-      "defaultConfiguration": "production"
+      "defaultConfiguration": "production",
+      "styles": [
+        "@taiga-ui/core/styles/taiga-ui-theme.less",
+        "@taiga-ui/core/styles/taiga-ui-fonts.less",
+        "@taiga-ui/addon-mobile/styles/taiga-ui-mobile.less"
+      ]
     },
     "test": {
       "executor": "@nx/angular:unit-test",

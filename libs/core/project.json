@@ -1,6 +1,5 @@
 {
   "name": "core",
-  "importPath": "@flowboard/core",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/core/src",
   "prefix": "lib",
@@ -12,7 +11,11 @@
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
         "project": "libs/core/ng-package.json",
-        "tsConfig": "libs/core/tsconfig.lib.json"
+        "tsConfig": "libs/core/tsconfig.lib.json",
+        "styles": [
+          "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
+          "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less"
+        ]
       },
       "configurations": {
         "production": {
