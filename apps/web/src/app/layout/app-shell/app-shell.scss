@@ -1,0 +1,109 @@
+@layer components {
+  .layout {
+    display: grid;
+    grid-template-rows: 4rem 1fr;
+    grid-template-columns: 16rem 1fr;
+    grid-template-areas:
+      "topbar topbar"
+      "sidebar content";
+
+    min-height: 100vh;
+    background: var(--fb-color-bg);
+  }
+
+  /* Topbar */
+  .topbar {
+    grid-area: topbar;
+
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+
+    padding: 0 var(--fb-space-5);
+    border-bottom: 1px solid var(--fb-color-border);
+    background: var(--fb-color-surface-elevated);
+
+    &__brand {
+      font-weight: 600;
+      font-size: var(--fb-text-md);
+    }
+
+    &__search {
+      width: 100%;
+      max-width: 40rem;
+      padding: var(--fb-space-2) var(--fb-space-3);
+      border-radius: var(--fb-radius-md);
+      border: 1px solid var(--fb-color-border);
+      background: var(--fb-color-surface);
+      font-size: var(--fb-text-sm);
+    }
+
+    &__right {
+      display: flex;
+      align-items: center;
+      gap: var(--fb-space-3);
+    }
+
+    &__avatar {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--fb-color-primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--fb-text-xs);
+      font-weight: 600;
+    }
+
+    &__username {
+      font-size: var(--fb-text-sm);
+    }
+
+    &__icon-button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+  }
+
+  /* Sidebar */
+  .sidebar {
+    grid-area: sidebar;
+
+    background: var(--fb-color-surface);
+    border-right: 1px solid var(--fb-color-border);
+    padding: var(--fb-space-5);
+
+    &__nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--fb-space-3);
+    }
+
+    &__link {
+      padding: var(--fb-space-2) var(--fb-space-3);
+      border-radius: var(--fb-radius-md);
+      text-decoration: none;
+      color: var(--fb-color-text-muted);
+
+      &:hover {
+        background: var(--fb-color-surface-elevated);
+        color: var(--fb-color-text);
+      }
+
+      &--active {
+        background: var(--fb-color-primary);
+        color: white;
+      }
+    }
+  }
+
+  /* Content */
+  .content {
+    grid-area: content;
+    padding: var(--fb-space-6);
+  }
+}

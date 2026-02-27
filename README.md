@@ -1,162 +1,124 @@
 # FlowBoard
 
-**FlowBoard** is a modern full-stack project management platform
-inspired by Jira, designed as a production-grade portfolio project to
-demonstrate advanced frontend, backend, infrastructure, and
-architectural skills aligned with 2026 market standards.
+> Production-grade SaaS architecture simulation built with Angular 21+,
+> Spring Boot, and Nx.
 
----
+------------------------------------------------------------------------
 
-## 🚀 Project Vision
+## 🏷 Badges
 
-FlowBoard simulates a real SaaS product architecture with:
+![Angular](https://img.shields.io/badge/Angular-21%2B-red)
+![Nx](https://img.shields.io/badge/Nx-Monorepo-blue) ![Spring
+Boot](https://img.shields.io/badge/Spring%20Boot-Java%2021-green)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue) ![Design
+System](https://img.shields.io/badge/Design-System%202026-purple)
+![Linted](https://img.shields.io/badge/Code%20Style-ESLint%20%2B%20Prettier-orange)
 
-- Multi-project management
-- Kanban board interface
-- Role-based access control (RBAC)
-- Real-time updates (planned)
-- Secure authentication (planned)
-- Cloud-ready deployment strategy (AWS planned)
+------------------------------------------------------------------------
 
-This is not a tutorial project.\
-It is a system architecture exercise designed to reflect real-world
-engineering standards.
+## 🎯 Project Goal
 
----
+FlowBoard is not a tutorial project.
 
-## 🏗 Architecture Overview
+It is a realistic simulation of a modern SaaS product architecture
+aligned with 2026 engineering standards, focusing on:
 
-High-level system design:
+-   Clean frontend boundaries
+-   Scalable monorepo structure
+-   Backend integration
+-   Design system maturity
+-   Production-ready practices
 
-Angular (Nx Monorepo) ↓ Spring Boot REST API ↓ PostgreSQL (Docker)
+------------------------------------------------------------------------
 
-The project follows a clean separation between frontend, backend, and
-infrastructure concerns.
+## 🏗 Architecture Diagram
 
-For full technical details, see:\
-**ARCHITECTURE.md**
+                            ┌───────────────┐
+                            │   AppShell    │
+                            │  (Topbar +    │
+                            │   Sidebar)    │
+                            └───────┬───────┘
+                                    │
+                                    ▼
+                            ┌───────────────┐
+                            │  RouterOutlet │
+                            └───────┬───────┘
+                                    │
+                    ┌───────────────┴───────────────┐
+                    ▼                               ▼
+            Projects Feature                 Board Feature
 
----
+Monorepo:
 
-## 🧰 Tech Stack
+apps/ - web (Angular 21+) - api (Spring Boot)
 
-### Frontend
+libs/ - ui (design abstraction) - core (infra services) - shared-types
+(contracts) - features (domain logic)
 
-- Angular (Standalone APIs)
-- Nx Monorepo
-- Taiga UI
-- Angular Signals (planned)
-- SCSS
+------------------------------------------------------------------------
 
-### Backend
+## 🎨 Design System (2026-ready)
 
-- Java 21
-- Spring Boot 3+
-- Spring Security
-- Spring Data JPA
-- PostgreSQL
-- Maven
+-   Manrope typography
+-   OKLCH color space
+-   Semantic design tokens
+-   Fluid typography via clamp()
+-   Dynamic state colors via color-mix()
+-   CSS cascade layers (@layer)
+-   Dark mode with \[data-theme="dark"\]
 
-### Infrastructure
+------------------------------------------------------------------------
 
-- Docker (PostgreSQL container)
-- Environment-based configuration
-- dotenv-cli for local variable injection
+## 📸 UI Preview
 
----
+Topbar with search + user controls\
+Sidebar navigation\
+Responsive grid layout\
+Mono SVG brand icon\
+Full favicon setup (SVG + PNG + Apple Touch + Manifest)
 
-## 📁 Monorepo Structure
+------------------------------------------------------------------------
 
-flowboard-app/ │ ├── apps/ │ ├── web/ → Angular application │ └── api/ →
-Spring Boot backend │ ├── libs/ → Shared frontend libraries (planned) │
-├── docker-compose.yml ├── PROMPT.md ├── ARCHITECTURE.md
+## 🧪 Code Quality & Tooling
 
----
+-   Nx enforceModuleBoundaries
+-   ESLint (Flat Config)
+-   simple-import-sort
+-   Prettier integration
+-   Husky pre-commit lint enforcement
+-   BEM methodology
+-   Path aliases
 
-## ⚙️ Local Development Setup
+------------------------------------------------------------------------
 
-### 1️⃣ Start PostgreSQL (Docker)
+## 🐳 Development Workflow
 
-```bash
+Database:
+
 docker compose up postgres -d
-```
 
-### 2️⃣ Configure environment variables
+Backend:
 
-Create a `.env` file based on:
-
-    .env.example
-
-### 3️⃣ Run Backend
-
-```bash
 npm run dev:api
-```
 
-This loads environment variables and runs:
+Frontend:
 
-    cd apps/api && ./mvnw spring-boot:run
-
-Spring Boot runs locally with DevTools enabled for hot reload.
-
-### 4️⃣ Run Frontend
-
-```bash
 npx nx serve web
-```
 
----
+------------------------------------------------------------------------
 
-## 🔐 Environment Variables
+## 🚀 Current Phase
 
-Environment configuration is managed via:
+-   Base layout implemented
+-   Design system configured
+-   Branding finalized
+-   Ready to implement first feature page
 
-- `.env` (ignored)
-- `.env.example` (committed)
-- Spring profiles (`application-dev.yml`)
+------------------------------------------------------------------------
 
-Sensitive credentials are never committed.
+## 📌 Philosophy
 
----
-
-## 📌 Current Status
-
-✔ Nx monorepo configured\
-✔ Angular app scaffolded\
-✔ Spring Boot backend scaffolded\
-✔ PostgreSQL containerized\
-✔ Environment strategy stabilized\
-✔ Development workflow operational
-
-Next phase:
-
-- Domain modeling
-- User authentication module
-- Kanban board implementation
-- Realtime updates
-
----
-
-## 🎯 Purpose
-
-FlowBoard exists to demonstrate:
-
-- Monorepo architecture with Nx
-- Modern Angular architecture
-- Clean Spring Boot backend structure
-- Docker-based development environment
-- Infrastructure-aware engineering
-- Production-oriented thinking
-
----
-
-## 📄 Documentation
-
-- Development Context → `PROMPT.md`
-- System Architecture → `ARCHITECTURE.md`
-
----
-
-## 📜 License
-
-This project is for portfolio and educational purposes.
+-   Avoid overengineering
+-   Prefer clarity over abstraction
+-   Keep boundaries explicit
+-   Build like a real product
