@@ -1,0 +1,176 @@
+/* =========================================
+   FlowBoard Design System
+   ========================================= */
+
+@layer tokens, base;
+
+/* =========================================
+   TOKENS LAYER
+   ========================================= */
+
+@layer tokens {
+  :root {
+    /* -------------------------------------
+       Typography
+       ------------------------------------- */
+
+    --fb-font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
+
+    /* Fluid type scale */
+    --fb-text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+    --fb-text-sm: clamp(0.875rem, 0.8rem + 0.2vw, 1rem);
+    --fb-text-md: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+    --fb-text-lg: clamp(1.125rem, 1rem + 0.5vw, 1.5rem);
+    --fb-text-xl: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
+    --fb-text-2xl: clamp(2rem, 1.8rem + 1vw, 2.75rem);
+
+    /* -------------------------------------
+       Spacing scale (4px base)
+       ------------------------------------- */
+
+    --fb-space-1: 0.25rem;
+    --fb-space-2: 0.5rem;
+    --fb-space-3: 0.75rem;
+    --fb-space-4: 1rem;
+    --fb-space-5: 1.5rem;
+    --fb-space-6: 2rem;
+    --fb-space-7: 3rem;
+
+    /* -------------------------------------
+       Radius scale
+       ------------------------------------- */
+
+    --fb-radius-sm: 0.5rem;
+    --fb-radius-md: 0.75rem;
+    --fb-radius-lg: 1rem;
+    --fb-radius-xl: 1.5rem;
+
+    /* -------------------------------------
+       Brand Colors (OKLCH)
+       ------------------------------------- */
+
+    --fb-color-primary: oklch(0.62 0.17 252);
+    --fb-color-accent: oklch(0.62 0.19 300);
+
+    /* Semantic surfaces */
+    --fb-color-bg: oklch(0.99 0 0);
+    --fb-color-surface: oklch(0.96 0 0);
+    --fb-color-surface-elevated: oklch(1 0 0);
+
+    /* Text */
+    --fb-color-text: oklch(0.2 0 0);
+    --fb-color-text-muted: oklch(0.45 0 0);
+
+    /* Borders */
+    --fb-color-border: oklch(0.85 0 0);
+
+    /* States via color-mix */
+    --fb-color-primary-hover: color-mix(
+      in oklch,
+      var(--fb-color-primary),
+      black 10%
+    );
+
+    --fb-color-primary-active: color-mix(
+      in oklch,
+      var(--fb-color-primary),
+      black 20%
+    );
+
+    /* -------------------------------------
+       Map to Taiga tokens
+       ------------------------------------- */
+
+    --tui-primary: var(--fb-color-primary);
+    --tui-primary-hover: var(--fb-color-primary-hover);
+    --tui-primary-active: var(--fb-color-primary-active);
+
+    --tui-accent: var(--fb-color-accent);
+
+    --tui-base-01: var(--fb-color-bg);
+    --tui-base-02: var(--fb-color-surface);
+    --tui-base-03: var(--fb-color-surface-elevated);
+
+    --tui-text-01: var(--fb-color-text);
+    --tui-text-02: var(--fb-color-text-muted);
+
+    --tui-font-text: var(--fb-font-sans);
+
+    --tui-radius-m: var(--fb-radius-md);
+    --tui-radius-l: var(--fb-radius-lg);
+  }
+
+  /* =========================================
+     Dark Mode
+     ========================================= */
+
+  [data-theme='dark'] {
+    --fb-color-bg: oklch(0.18 0 0);
+    --fb-color-surface: oklch(0.24 0 0);
+    --fb-color-surface-elevated: oklch(0.32 0 0);
+
+    --fb-color-text: oklch(0.95 0 0);
+    --fb-color-text-muted: oklch(0.8 0 0);
+
+    --fb-color-border: oklch(0.35 0 0);
+
+    --fb-color-primary-hover: color-mix(
+      in oklch,
+      var(--fb-color-primary),
+      white 10%
+    );
+
+    --fb-color-primary-active: color-mix(
+      in oklch,
+      var(--fb-color-primary),
+      white 20%
+    );
+  }
+}
+
+/* =========================================
+   BASE LAYER
+   ========================================= */
+
+@layer base {
+  html {
+    font-family: var(--fb-font-sans);
+    font-size: 100%;
+    background: var(--fb-color-bg);
+    color: var(--fb-color-text);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--fb-color-bg);
+  }
+
+  h1 {
+    font-size: var(--fb-text-2xl);
+    font-weight: 700;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: var(--fb-text-xl);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  h3 {
+    font-size: var(--fb-text-lg);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  p {
+    font-size: var(--fb-text-md);
+    color: var(--fb-color-text-muted);
+    margin: 0;
+  }
+
+  button {
+    font: inherit;
+  }
+}
