@@ -1,254 +1,135 @@
-# FlowBoard — Roadmap
+# FlowBoard Roadmap
 
-This roadmap outlines the planned evolution of FlowBoard in clear and incremental phases.
+This roadmap defines the phased evolution of FlowBoard as a
+production-grade SaaS architecture project.
 
-Each phase focuses on delivering meaningful architectural progress while avoiding overengineering.
+The goal is to simulate real-world engineering standards aligned with
+2026 practices, without overengineering.
 
----
+------------------------------------------------------------------------
 
-## 🔵 FASE 0 — Setup Mínimo para Rodar Localmente
+# 🔵 FASE 0 --- Foundation & Local Setup
 
-Objetivo: ter o projeto Angular rodando com estrutura escalável e preparada para crescer.
+## Objectives
 
-### Monorepo Nx
+-   Nx integrated monorepo
+-   Angular 21+ standalone architecture
+-   Spring Boot (Java 21)
+-   PostgreSQL via Docker
+-   ESLint (Flat Config)
+-   Prettier
+-   Husky (pre-commit lint)
+-   Path aliases
+-   Module boundaries enforcement
+-   Taiga UI integration
+-   Modern design system (OKLCH, clamp, color-mix, @layer)
+-   AppShell + AuthShell layout
+-   Branding + favicon setup
 
-- Criar workspace Nx
-- Criar app Angular standalone
-- Criar libs:
-  - ui
-  - core
-  - shared-types
-  - features
-- Configurar path aliases
-- Configurar ESLint + Prettier
-- Configurar Husky (opcional)
+Status: ✅ Completed
 
-### Angular Base
+------------------------------------------------------------------------
 
-- Habilitar Standalone APIs
-- Configurar Router standalone
-- Configurar estrutura base:
-  - app.routes.ts
-  - layout principal
-- Configurar biblioteca de UI (Taiga UI)
-- Criar tema base (light/dark preparado)
-- Criar layout base (header + sidebar)
+# 🟢 FASE 1 --- Core Frontend Features
 
-### Mocks
+## Objectives
 
-- Criar pasta mocks
-- Criar services fake:
-  - MockProjectService
-  - MockTaskService
-  - MockUserService
-- Criar dados estáticos iniciais
+-   Implement ProjectsPage
+-   Implement BoardPage
+-   Wire router structure
+-   Integrate Taiga UI components
+-   Create mock data layer
+-   Introduce Signals for local state
+-   Establish feature folder structure inside libs/features
 
-### Resultado
+Focus: frontend architecture maturity.
 
-- Estrutura profissional
-- Layout pronto
-- UI base
-- Serviços mockados
-- Aplicação rodando sem backend
+------------------------------------------------------------------------
 
-Tempo estimado: 1 semana (~30h)
+# 🟡 FASE 2 --- Authentication & Security
 
----
+This phase introduces real security concerns and architectural
+separation.
 
-## 🔵 FASE 1 — Projetos (Multi-projeto)
+## 2.1 --- Authentication Basics
 
-Agora adicionamos contexto multi-projeto antes do board.
+-   User entity
+-   Login endpoint
+-   Password hashing
+-   Session handling
 
-### UI
+## 2.2 --- Introduce BFF Layer (Spring-Based)
 
-- Página de listagem de projetos
-- Criar projeto
-- Editar projeto
-- Navegação para board por projeto
+FlowBoard will implement the Backend for Frontend (BFF) pattern using
+Spring Boot.
 
-### Estado
+No additional Node layer will be introduced.
 
-- Signal Store para projetos
-- Seleção de projeto ativo
+### Architectural Strategy
 
-### Permissões (simuladas)
+Browser → Spring (BFF layer) → Domain Layer → Database
 
-- Definir papéis mockados
-- Restringir UI conforme role
+Responsibilities of BFF layer:
 
-### Resultado
+-   Adapt domain models for UI consumption
+-   Control authentication flow
+-   Issue and validate HttpOnly cookies
+-   Protect against XSS token exposure
+-   Centralize security logic
+-   Prepare RBAC enforcement
 
-- Multi-tenant UI
-- Separação de dados por projeto
-- Estrutura próxima de SaaS real
+### Implementation Approach
 
-Tempo estimado: 1 semana (~30h)
+-   Separate web layer packages for UI-oriented controllers
+-   DTOs specific for UI (not exposing entities)
+-   Spring Security configuration
+-   Cookie-based authentication
+-   CSRF protection
+-   Refresh token rotation (optional advanced step)
 
----
+Goal: simulate enterprise-grade security architecture.
 
-## 🔵 FASE 2 — Board Kanban
+------------------------------------------------------------------------
 
-Agora começamos pelo que é visual e impactante.
+# 🟠 FASE 3 --- Authorization & RBAC
 
-### Estrutura de Domínio
+-   Role-based access control
+-   Permission checks
+-   UI adaptation based on roles
+-   Backend enforcement of roles
 
-- Modelos TypeScript:
-  - Project
-  - Task
-  - User
-  - Column
-- Enums:
-  - TaskStatus
-  - TaskPriority
+------------------------------------------------------------------------
 
-### Kanban UI
+# 🔵 FASE 4 --- Realtime & Advanced Features
 
-- Criar página BoardPage
-- Criar componente KanbanColumn
-- Criar componente TaskCard
-- Implementar Angular CDK Drag & Drop
-- Atualizar estado via Signals
-- Implementar ordenação
+-   WebSocket or SSE
+-   Live board updates
+-   Optimistic UI patterns
+-   Advanced state management
 
-### Modais
+------------------------------------------------------------------------
 
-- Modal criar tarefa
-- Modal editar tarefa
-- Exclusão com confirmação
+# 🟣 FASE 5 --- Infrastructure & Deployment
 
-### Estado
+-   Dockerization refinement
+-   Production configuration
+-   Environment-based config separation
+-   AWS deployment simulation
+-   CI/CD pipeline (GitHub Actions)
 
-- Signal Store para Board
-- Estado derivado:
-  - tarefas por coluna
-  - contadores
-  - filtros ativos
+------------------------------------------------------------------------
 
-### Extras estratégicos
+# Architectural Principles (Always Active)
 
-- Filtro por usuário
-- Filtro por prioridade
-- Busca textual
+-   Avoid overengineering
+-   Prefer clarity over abstraction
+-   Keep boundaries explicit
+-   No unnecessary microservices
+-   Production-oriented mindset
+-   Clean dependency graph
+-   Feature-based structure
 
-### Resultado
+------------------------------------------------------------------------
 
-- Produto visualmente forte
-- Experiência tipo Jira
-- Uso real de Signals
-- Arquitetura frontend madura
-
-Tempo estimado: 2 semanas (~60h)
-
----
-
-## 🔵 FASE 3 — Autenticação (Mock)
-
-### UI
-
-- Tela de login
-- Tela de registro
-- Guard de rota
-- Interceptor (simulado)
-
-### Estado
-
-- AuthStore com Signals
-- Usuário logado mockado
-- Persistência em localStorage
-
-### Controle de acesso
-
-- Proteger rotas
-- Esconder elementos conforme role
-
-### Resultado
-
-- Aplicação com fluxo autenticado
-- UX mais realista
-- Base pronta para backend real
-
-Tempo estimado: 1 semana (~30h)
-
----
-
-## 🔵 FASE 4 — Conectar Backend Real
-
-Agora começa a substituição gradual dos mocks.
-
-### Backend Setup
-
-- Criar app Spring Boot no monorepo
-- Configurar Postgres
-- Docker Compose
-
-Tempo: 3–4 dias
-
-### Persistência por Camadas
-
-Ordem recomendada:
-
-1️⃣ Projetos
-
-- Criar entidades
-- Criar CRUD
-- Substituir MockProjectService
-
-2️⃣ Tasks
-
-- CRUD tarefas
-- Endpoint mover tarefa
-- Substituir MockTaskService
-
-3️⃣ Auth
-
-- JWT
-- Spring Security
-- Substituir MockUserService
-
-Tempo total backend: 2–3 semanas (~75h)
-
----
-
-## 🔵 FASE 5 — Realtime
-
-Após persistência funcionar:
-
-### Backend
-
-- Configurar WebSocket
-- Canal por projeto
-- Broadcast de eventos
-
-### Frontend
-
-- Serviço WebSocket
-- Atualizar Signal Store dinamicamente
-
-Tempo estimado: 1 semana
-
----
-
-## 🔵 FASE 6 — AWS + Deploy
-
-- Dockerização completa
-- RDS
-- EC2
-- CI/CD
-- HTTPS
-
-Tempo estimado: 1–2 semanas
-
----
-
-## 📊 Cronograma Total
-
-| Fase         | Semanas                   |
-| ------------ | ------------------------- |
-| Setup        | 1                         |
-| Projetos     | 1                         |
-| Kanban       | 2                         |
-| Auth (mock)  | 1                         |
-| Backend real | 3                         |
-| Realtime     | 1                         |
-| AWS          | 1–2                       |
-| **Total**    | **10–11 semanas (~300h)** |
+This roadmap is iterative and may evolve as architectural decisions
+mature.
